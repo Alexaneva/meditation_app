@@ -65,7 +65,7 @@ flutter:
     - assets/images/sky.jpeg
     - assets/images/tree.jpeg
     - assets/images/user.jpeg
-    - assets/images/yoga.jpeg
+    - assets/images/yoga.jpg
   fonts:
     - family: Outfit
       fonts:

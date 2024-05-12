@@ -15,13 +15,8 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       builder: (context, _) {
-        return MaterialApp(
-          title: 'Flutter Demo Home Page',
-          debugShowCheckedModeBanner: false,
-          home: const HomeScreen(),
-          theme: ThemeData(
-            fontFamily: 'Outfit',
-          ),
+        return const MaterialApp(
+          home: HomeScreen(),
         );
       },
     );

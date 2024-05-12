@@ -8,7 +8,7 @@ import '../widgets/music_tile.dart';
 import '../widgets/wave_clip.dart';
 
 class MusicScreen extends StatelessWidget {
-  const MusicScreen({Key? key}) : super(key: key);
+  const MusicScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class MusicScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         image: const DecorationImage(
-                          image: AssetImage('assets/images/yoga.jpeg'),
+                          image: AssetImage('assets/images/yoga.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -105,7 +105,7 @@ class MusicScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   Text(
-                    'by Tony Lane',
+                    'Free your mind',
                     style: TextStyle(
                       fontSize: 14.r,
                       color: Colors.grey,
@@ -154,34 +154,6 @@ class MusicScreen extends StatelessWidget {
             ),
           ),
 
-          //Play Button
-          Positioned.fill(
-            bottom: 30.h,
-            left: 0,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 80.r,
-                height: 80.r,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(2, 6),
-                        blurRadius: 50,
-                        color: Colors.green.shade200.withOpacity(0.1),
-                      ),
-                    ]),
-                child: Icon(
-                  Icons.play_arrow,
-                  size: 25.r,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-
           //Bottom Gradient
           Positioned(
             bottom: 0,
@@ -191,7 +163,7 @@ class MusicScreen extends StatelessWidget {
               begin: const Offset(0, 50),
               intervalEnd: 0.6,
               child: Container(
-                height: 140.h,
+                height: 50.h,
                 padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 30.w),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -202,36 +174,6 @@ class MusicScreen extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          '2:30',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ),
-                        Text(
-                          'Rainforest-Relaxing',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12.r,
-                          ),
-                        ),
-                        Text(
-                          '-0:50',
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.8),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
                 ),
               ),
             ),
