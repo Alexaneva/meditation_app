@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.0
+  audioplayers: ^6.0.0
 
 
 dev_dependencies:
@@ -64,8 +65,12 @@ flutter:
     - assets/images/ocean.jpeg
     - assets/images/sky.jpeg
     - assets/images/tree.jpeg
-    - assets/images/user.jpeg
-    - assets/images/yoga.jpg
+    - assets/images/yoga.jpeg
+    - assets/images/palm.jpg
+    - assets/music/healing.mp3
+    - assets/music/reiki.mp3
+    - assets/music/tibet.mp3
+    - assets/music/water-healing.mp3
   fonts:
     - family: Outfit
       fonts:

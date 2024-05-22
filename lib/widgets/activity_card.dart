@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../models/song.dart';
 import '../screens/music_screen.dart';
 
 class ActivityCard extends StatelessWidget {
-  const ActivityCard(
-      {Key? key,
-      required this.title,
-      required this.subtitle,
-      required this.image})
-      : super(key: key);
+  const ActivityCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.image,
+    required this.songs,
+    required this.subtitle1,
+    required this.background,
+    required this.title1,
+    required this.subtitle2,
+  });
 
   final String title;
   final String subtitle;
   final String image;
+  final String background;
+  final List<Song> songs;
+  final String title1;
+  final String subtitle1;
+  final String subtitle2;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,14 @@ class ActivityCard extends StatelessWidget {
               child: child,
             ),
             pageBuilder: (context, animation, secondaryAnimation) =>
-                const MusicScreen(),
+                MusicScreen(
+              songs: songs,
+              image: image,
+              title1: title1,
+              subtitle1: subtitle1,
+              subtitle2: subtitle2,
+              background: background,
+            ),
           ),
         );
       },

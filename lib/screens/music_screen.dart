@@ -1,14 +1,36 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../animation/scale_animation.dart';
 import '../animation/slide_animation.dart';
+import '../models/song.dart';
 import '../widgets/blur_effect.dart';
-import '../widgets/music_tile.dart';
 import '../widgets/wave_clip.dart';
 
-class MusicScreen extends StatelessWidget {
-  const MusicScreen({super.key});
+class MusicScreen extends StatefulWidget {
+  final List<Song> songs;
+  final String image;
+  final String background;
+  final String title1;
+  final String subtitle1;
+  final String subtitle2;
+  const MusicScreen({super.key, required this.songs, required this.image, required this.title1, required this.subtitle1, required this.subtitle2, required this.background});
+
+  @override
+  State<MusicScreen> createState() => _MusicScreenState();
+}
+
+class _MusicScreenState extends State<MusicScreen> {
+  AudioPlayer audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  int currentIndex = -1;
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +51,8 @@ class MusicScreen extends StatelessWidget {
                   height: ScreenUtil().screenHeight * 0.6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/tree.jpeg'),
+                    image: DecorationImage(
+                      image: AssetImage(widget.background),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -68,7 +90,7 @@ class MusicScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Killing Anxiety',
+                    widget.title1,
                     style: TextStyle(
                       fontSize: 26.r,
                       fontWeight: FontWeight.w600,
@@ -79,7 +101,7 @@ class MusicScreen extends StatelessWidget {
                   SizedBox(
                     width: ScreenUtil().screenWidth * 0.8,
                     child: Text(
-                      'Calm your anxieties, reduce tension and increase body awarness',
+                      widget.subtitle1,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14.r,
@@ -96,8 +118,8 @@ class MusicScreen extends StatelessWidget {
                       height: 180.r,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/yoga.jpg'),
+                        image: DecorationImage(
+                          image: AssetImage(widget.image),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -105,7 +127,7 @@ class MusicScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   Text(
-                    'Free your mind',
+                    widget.subtitle2,
                     style: TextStyle(
                       fontSize: 14.r,
                       color: Colors.grey,
@@ -123,29 +145,57 @@ class MusicScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40.w),
                     child: SlideAnimation(
                       begin: const Offset(0, 100),
-                      child: Column(
-                        children: <Widget>[
-                          const MusicTile(
-                            title: 'Behaviour of Mind',
-                            length: '2:04',
-                            isLocked: false,
-                          ),
-                          SizedBox(height: 20.h),
-                          const MusicTile(
-                            title: 'Your Inner Voice',
-                            length: '1:56',
-                          ),
-                          SizedBox(height: 20.h),
-                          const MusicTile(
-                            title: 'Embrace your emotions',
-                            length: '3:12',
-                          ),
-                          SizedBox(height: 20.h),
-                          const MusicTile(
-                            title: 'Letting go of everything',
-                            length: '2:37',
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: widget.songs.length,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  children: [
+                                    IconButton(
+                                      icon: currentIndex == index
+                                          ? const Icon(Icons.pause)
+                                          : const Icon(Icons.play_arrow),
+                                      onPressed: () {
+                                        setState(() {
+                                          if (currentIndex == index) {
+                                            stopMusic();
+                                            currentIndex = -1;
+                                          } else {
+                                            playMusic(widget.songs[index].audioUrl);
+                                            currentIndex = index;
+                                          }
+
+                                        });
+                                      },
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Text(
+                                      widget.songs[index].name,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      widget.songs[index].length,
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -181,5 +231,15 @@ class MusicScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void playMusic(String url) async {
+    await audioPlayer.play(AssetSource(url));
+    isPlaying = true;
+  }
+
+  void stopMusic() {
+    audioPlayer.stop();
+    isPlaying = false;
   }
 }
