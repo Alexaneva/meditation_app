@@ -1,16 +1,14 @@
-# meditation_app
+# 𝙢𝙚𝙙𝙞𝙩𝙖𝙩𝙞𝙤𝙣_𝙖𝙥𝙥
 
-A new Flutter project.
 
-## Getting Started
+## Tech Stack
 
-This project is a starting point for a Flutter application.
+Screenutil <br>
+Audioplayers <br>
+Custom animation <br>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+https://github.com/Alexaneva/meditation_app/assets/104970950/c4cf4c4e-84dd-48be-8d5e-4190b6ed778a
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
